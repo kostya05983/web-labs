@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>HTML 5</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<!--List with elements-->
+<ol type="1" start=5>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+</ol>
+
+<!--table-->
+<table style="width:15%">
+    <tr>
+        <th colspan="2"></th>
+        <th></th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="2"></td>
+    </tr>
+</table>
+
+<hr>
+<!--Requests-->
+<div>
+<input type="radio" name="Request" value="GET">GET
+<br>
+<input type="radio" name="Request" value="POST" checked="checked">POST
+<br>
+</div>
+<br>
+
+<!--Choose browsers-->
+<div>
+Выберите браузер:
+<br>
+<input list="browsers" name="browser">
+
+<datalist id="browsers">
+    <option value="Chrome">
+    <option value="Firefox">
+    <option value="Opera">
+</datalist>
+<input value="Отправить" type="submit">
+</div>
+
+</body>
