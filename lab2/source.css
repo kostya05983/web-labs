@@ -1,0 +1,22 @@
+body {
+    background-color: cyan;
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+.box {
+    width: 80px;
+    height:200px;
+    background: silver;
+    border-radius: 25px;
+}
+
+.circle {
+    width: 50px;
+    height:50px;
+    border-radius: 50%;
+    margin: 10px auto 0;
+}

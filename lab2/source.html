@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML 5</title>
+    <link rel="stylesheet" href="source.css">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<!--List with elements-->
+<ol type="1" start=5>
+    <li style="color: red">HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+</ol>
+
+<!--table-->
+<table style="width:15%; ">
+    <tr>
+        <th colspan="2"></th>
+        <th></th>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="2"></td>
+    </tr>
+</table>
+
+<hr>
+<!--Requests-->
+<div style="color: blue;">
+    <input type="radio" name="Request" value="GET"><a href="https://www.google.com/">GET</a>
+    <br>
+    <input type="radio" name="Request" value="POST" checked="checked">POST
+    <br>
+</div>
+<br>
+
+<!--Choose browsers-->
+<div>
+    Выберите браузер:
+    <br>
+    <input list="browsers" name="browser">
+
+    <datalist id="browsers">
+        <option value="Chrome">
+        <option value="Firefox">
+        <option value="Opera">
+    </datalist>
+    <input value="Отправить" type="submit">
+</div>
+
+<br>
+<!--Светафор-->
+<div class="box" style=" padding-top:5px;">
+    <div class="circle" style="background-color: red;">
+    </div>
+    <div class="circle" style="background-color: yellow"></div>
+    <div class="circle" style="background-color: green"></div>
+</div>
+
+</body>
+</html>
