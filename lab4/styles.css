@@ -1,0 +1,21 @@
+.notClicked {
+    text-align: center;
+    vertical-align: middle;
+    width: 100px;
+    height: 60px;
+    background-color: white;
+}
+
+.field {
+    position: absolute;
+    height: 200px;
+    width: 400px;
+    margin: -100px 0 0 -200px;
+    top: 50%;
+    left: 50%;
+}
+
+.timer {
+    text-align: center;
+    vertical-align: top;
+}

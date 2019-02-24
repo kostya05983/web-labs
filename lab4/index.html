@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Игра</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <style>
+    </style>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!--Форма ввода-->
+<form id="create">
+    <input type="text" size="40" class="size">
+    <input type="submit" value="Создать">
+</form>
+
+<div id="time" class="timer">
+</div>
+
+<!--Контейнер для таблицы-->
+<div id="container" class="field">
+
+</div>
+
+<script>
+    let current;
+
+    let array;
+
+    let end;
+
+    let isEnd;
+
+    let timeout;
+
+    let interval;
+
+    // main generation
+    $("#create").submit(function (event) {
+        const size = $(".size").val();
+        end = size * size + 1;
+
+        if ($.isNumeric(size)) {
+            $("#container").empty();
+            current = 1;
+            isEnd = false;
+            preparesRandomizeArray(size);
+            generateGrid(size);
+            setTime(size);
+        } else {
+            alert("Size is not numeric, please input another text")
+        }
+        event.preventDefault();
+    });
+
+    /**
+     * generate grid for our game
+     */
+    function generateGrid(size) {
+        for (let i = 0; i < size; i++) {
+            const trId = 'tr' + i;
+            $("#container").append("<tr id='temp'></tr>");
+            const tr = document.getElementById('temp');
+            tr.setAttribute("id", trId);
+
+            for (let j = 0; j < size; j++) {
+                const number = size * i + j;
+                const tdId = 'td' + number;
+
+                $("#tr" + i).append("<td id='temp1' class='notClicked'></td>");
+
+                const td = document.getElementById('temp1');
+                td.setAttribute("id", tdId);
+                td.innerHTML = array[number];
+                td.style = "font-size:" + Math.floor((Math.random() * 25) + 14) + "px;\ncolor:" + getRandomColor();
+            }
+        }
+    }
+
+    $(document).on('click', ".notClicked", function () {
+        //end case
+        if (current === end - 1 && parseInt(this.innerText, 10) === current) {
+            isEnd = true;
+            alert("You win");
+            current++;
+            this.style.backgroundColor = "gold";
+            return;
+        }
+
+        if (parseInt(this.innerText, 10) === current) {
+            current++;
+            this.style.backgroundColor = "gold";
+        }
+    });
+
+    /**
+     * set our timers for play
+     */
+    function setTime(size) {
+        clearTimeout(timeout);
+        clearInterval(interval);
+        document.getElementById("time").innerText = size * size;
+        interval = window.setInterval(onEachSecond, 1000);
+        timeout = setTimeout(onEnd, size * size * 1000);
+    }
+
+    /**
+     * call on eachSecond to decrement timer
+     */
+    function onEachSecond() {
+        if (!isEnd) {
+            let time = parseInt(document.getElementById("time").innerText, 10);
+            time--;
+            document.getElementById("time").innerText = time;
+        }
+    }
+
+    /**
+     * call onEnd if player not click all on time
+     */
+    function onEnd() {
+        if (current !== end) {
+            isEnd = true;
+            alert("You failed");
+        }
+    }
+
+    /**
+     * prepare our randomize array with numbers
+     * @param size - size of grid 3x3
+     */
+    function preparesRandomizeArray(size) {
+        createArray(size);
+        shuffle(array);
+    }
+
+    /**
+     * create array for game
+     */
+    function createArray(size) {
+        array = [];
+        for (let i = 1; i < size * size + 1; i++) {
+            array.push(i);
+        }
+    }
+
+    /**
+     * Shuffles array in place.
+     * @param {Array} a items An array containing the items.
+     */
+    function shuffle(a) {
+        let j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+    }
+
+    /**
+     * generates random color
+     * @returns {string}
+     */
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>
+</body>
+</html>
