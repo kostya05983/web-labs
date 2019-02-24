@@ -12,15 +12,20 @@
         th, td {
             padding-top: 30px;
         }
+
+        .example2 {
+            background-color: black;
+            color: white;
+        }
     </style>
 </head>
 <body>
 
 <!--List with elements-->
 <ol type="1" start=5>
-    <li style="color: red">HTML</li>
-    <li>CSS</li>
-    <li>JavaScript</li>
+    <li style="color: red"><h1><i>HTML</i></h1></li>
+    <li><p>C<span style="color: brown">S</span>S</p></li>
+    <li><b>JavaScript</b></li>
 </ol>
 
 <!--table-->
@@ -43,16 +48,18 @@
 <hr>
 <!--Requests-->
 <div style="color: blue;">
-    <input type="radio" name="Request" value="GET"><a href="https://www.google.com/">GET</a>
+    <input type="radio" name="Request" value="GET"><a href="mailto:kostya05983@mail.ru">GET</a>
     <br>
-    <input type="radio" name="Request" value="POST" checked="checked">POST
+    <input type="radio" name="Request" value="POST" checked="checked"><u>POST</u>
     <br>
 </div>
 <br>
 
 <!--Choose browsers-->
 <div>
-    Выберите браузер:
+    Выберите
+    <mark>браузер</mark>
+
     <br>
     <input list="browsers" name="browser">
 
@@ -63,7 +70,41 @@
     </datalist>
     <input value="Отправить" type="submit">
 </div>
+<details>
+    <summary>Показать еще применение тегов</summary>
+    sub <sub>нижний текст</sub> <sup>верхний текст</sup>
+    <pre>
+    Демонстрирую тег pre
+</pre>
+    <figure>
+        <img src="picture.jpg"
+             alt=""/>
+        <figcaption>AI</figcaption>
+    </figure>
+</details>
 
+<details>
+    <summary>Демонстрация отличяи div и span</summary>
+    <div>Первый div</div>
+    <div>Второй div</div>
+    <span>Первый span</span>
+    <span>Второй span</span>
+</details>
+
+<details>
+    <summary>Демонстрация различия подключения стилей</summary>
+    <div class="example">
+        С помощью ссылки
+        <div class="example2">
+            С помощью тега style
+            <div style="background: brown; color: black;">
+                С помощью параметров style тега
+            </div>
+        </div>
+
+
+    </div>
+</details>
 <br>
 <!--Светафор-->
 <div class="box" style=" padding-top:5px;">
@@ -71,7 +112,7 @@
     </div>
     <div class="circle" style="background-color: yellow"></div>
     <div class="circle" style="background-color: green"></div>
-</div>
+<!--</div>-->
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->
