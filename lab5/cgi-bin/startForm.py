@@ -3,6 +3,7 @@ import cgi, cgitb
 import http.cookies
 import os
 from CookStorage import CookStorage
+import uuid
 
 head = """
 <!DOCTYPE html>
@@ -11,7 +12,7 @@ head = """
     <meta charset="UTF-8">
     <title>first Question</title>
 </head>
-<body>
+<body style="background-color: aqua" >
 """
 
 questions = [["В каком случае водитель совершит вынужденную остановку?",
@@ -155,7 +156,16 @@ def get_method():
         return method.value
 
 
+def check_session():
+    if cook.get("session") is None:
+        id = uuid.uuid1()
+        cook["session"] = id
+        print("Set-cookie: session=%s" % id)
+
+
 storage = CookStorage()
 cook = http.cookies.SimpleCookie(os.environ.get("HTTP_COOKIE"))
+check_session()
+
 form = cgi.FieldStorage()
 if_last()
