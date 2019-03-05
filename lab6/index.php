@@ -13,14 +13,27 @@
 
 <script>
     let currentQuestion = 0;
+    let score = 0;
+
     $(document).ready(function () {
         $('#question_block').load('/questions/question1.html', function (event) {
-            alert("Questions was load")
+            console.log("Start question was load")
         });
     });
 
-    $('#ok').submit(function (event) {
+    $('#ok').click(function () {
         alert("Handler for .submit() called.");
+        let choose = $("input[name='question']:checked").val();
+        if (choose === "right") {
+            score = score + 1
+        }
+
+        currentQuestion = currentQuestion + 1;
+
+        $("#question_block").empty().load(`questions/question${currentQuestion + 1}.html`, function (event) {
+            console.log("current score")
+        });
+
         event.preventDefault();
     });
 
