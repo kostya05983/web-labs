@@ -14,6 +14,7 @@
 <script>
     let currentQuestion = 0;
     let score = 0;
+    const end = 1;
 
     $(document).ready(function () {
         $('#question_block').load('/questions/question1.html', function (event) {
@@ -22,10 +23,15 @@
     });
 
     $('#ok').click(function () {
-        alert("Handler for .submit() called.");
+        console.log("Handle for ok button was called")
         let choose = $("input[name='question']:checked").val();
         if (choose === "right") {
             score = score + 1
+        }
+
+        if (currentQuestion === end) {
+            window.location.pathname = "/end_page.php"
+            return
         }
 
         currentQuestion = currentQuestion + 1;
