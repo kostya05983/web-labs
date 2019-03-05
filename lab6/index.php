@@ -14,7 +14,9 @@
 <script>
     let currentQuestion = 0;
     let score = 0;
-    const end = 1;
+    let startDate = new Date();
+    const end = 6;
+
 
     $(document).ready(function () {
         $('#question_block').load('/questions/question1.html', function (event) {
@@ -30,7 +32,11 @@
         }
 
         if (currentQuestion === end) {
-            window.location.pathname = "/end_page.php"
+            let t2 = new Date();
+            const dif = t2 - startDate;
+            let seconds = dif / 1000;
+            alert(seconds);
+            window.location = `end_page/end_page.php/?score=${score}&amount=${end+1}&time=${seconds}`;
             return
         }
 
