@@ -1,7 +1,7 @@
 <html>
 <body>
 
-<div style="align-content: center; margin:auto; width: 50%">
+<div style="align-content: center; margin:auto; width: 50%; text-align: center">
     <?php
     $score = $_GET['score'];
     $amount = $_GET['amount'];
@@ -14,8 +14,23 @@
     ?>
 </div>
 
+<div style="align-content: center; margin: auto; width: 50%; text-align: center">
+    <?php
+    $session = $_COOKIE['session'];
+    $myfile = fopen("$session.txt", "w") or die("Unable to open file!");
+    $score = $_GET['score'];
+    $amount = $_GET['amount'];
+    $time = $_GET['time'];
+    fwrite($myfile, "Счет $score, Из $amount Время $time c \n");
+    fclose($myfile);
 
-<div style="align-content: center; margin: auto; width: 50%">
+    //    echo "<button onclick=\"window.location.assign('http://localhost:9092/end_page/$session.txt')\" >Скачать</button>"
+    echo "<a href='http://localhost:9092/end_page/$session.txt' download='$session.txt'><button>Скачать статистику</button></a>"
+    ?>
+</div>
+
+
+<div style="align-content: center; margin: auto; width: 50%; margin-top: 100px;">
     <?php
 
     class simplepie
@@ -67,7 +82,7 @@
     /** usage */
     $score = $_GET['score'];
     $amount = $_GET['amount'];
-    if (0 == $amount-$score) {
+    if (0 == $amount - $score) {
         $dataArr = array('неправильные ответы' => $score, 'правильные ответы' => $amount - $score);
         $width = 600;
         $height = 480;
