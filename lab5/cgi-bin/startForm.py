@@ -11,8 +11,9 @@ head = """
 <head>
     <meta charset="UTF-8">
     <title>first Question</title>
+   <link href="styles.css" rel="stylesheet">
 </head>
-<body style="background-color: aqua" >
+<body style="background-color: white" >
 """
 
 questions = [["В каком случае водитель совершит вынужденную остановку?",
@@ -71,7 +72,7 @@ form_end = """
 """
 
 common_question = """
-    <input type="radio" name="question" value="%d"/> %s
+    <input class="container" type="radio" name="question" value="%d"/> %s
     <br>
 """
 
