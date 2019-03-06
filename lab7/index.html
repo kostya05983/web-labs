@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Воливач лабораторная №7</title>
+    <link href="styles.css" rel="stylesheet">
+    <script>
+        /**
+         * Обработка логики выбора производителя в первом списке
+         */
+        function selectProducer() {
+            document.getElementById('result').innerText = "";
+            let producer = document.getElementById("producer");
+            //Если ничего не выбрано, то очищаем список
+            if (producer.selectedIndex === 0) {
+                let modelSelect = document.getElementById('model');
+                while (modelSelect.firstChild) {
+                    modelSelect.removeChild(modelSelect.firstChild);
+                }
+                modelSelect.disabled = true;
+                document.getElementById("submit").disabled = true;
+                let modelOption = document.createElement('option');
+                modelOption.value = "none";
+                modelOption.text = "Выберите модель";
+                modelSelect.appendChild(modelOption);
+                return;
+            }
+            let producerValue = producer.options[producer.selectedIndex].value;
+            //Делаем запрос для получения результатов списка
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:8080/models/?producer=' + producerValue, true);
+            xhr.send();
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    //Парсим json
+                    let models = JSON.parse(xhr.responseText);
+                    let modelSelect = document.getElementById('model');
+                    while (modelSelect.firstChild) {
+                        modelSelect.removeChild(modelSelect.firstChild);
+                    }
+                    //Создаем новый элемент
+                    let modelOption = document.createElement('option');
+                    modelOption.value = "none";
+                    modelOption.text = "Выберите модель";
+                    modelSelect.appendChild(modelOption);
+                    //Для всех элементов заполняем список
+                    models.forEach(model => {
+                        let modelOption = document.createElement('option');
+                        modelOption.value = model;
+                        modelOption.text = model;
+                        modelSelect.appendChild(modelOption);
+                    });
+                    modelSelect.disabled = false;
+                }
+            }
+        }
+
+        /**
+         * Обработка при изменении модели
+         */
+        function modelChange() {
+            document.getElementById('result').innerText = "";
+            let producer = document.getElementById("producer");
+            let model = document.getElementById("model");
+
+            // Отключаем кнопку выбора, если ничего не выбрано
+            if (producer.selectedIndex * model.selectedIndex === 0) {
+                document.getElementById("submit").disabled = true;
+                return;
+            }
+            document.getElementById("submit").disabled = false;
+        }
+
+        /**
+         * Обработка выбора производителя
+         */
+        function submitForm() {
+            event.preventDefault();
+            let producer = document.getElementById("producer");
+            let model = document.getElementById("model");
+
+            if (producer.selectedIndex * model.selectedIndex === 0) {
+                document.getElementById("submit").disabled = true;
+                return;
+            }
+            let producerValue = producer.options[producer.selectedIndex].value;
+            let modelValue = model.options[model.selectedIndex].value;
+
+            //Делаем запрос
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:8080/producer?producer=' + producerValue + '&model=' + modelValue, true);
+            xhr.send();
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let resultElement = document.getElementById('result');
+                    resultElement.innerText = xhr.responseText;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<form onsubmit="submitForm()">
+    <label>Выберите производителя:</label>
+    <div class="styled-select green rounded" style="color: black;">
+        <select id="producer" name="producers" style="color: black;" required onchange="selectProducer()">
+            <option value="none">Выберите производителя</option>
+            <option value="Intel">Intel</option>
+            <option value="WesternDigital">WesternDigital</option>
+            <option value="Samsung">Samsung</option>
+            <option value="Kingston">Kingston</option>
+        </select>
+    </div>
+    <br/>
+    <br/>
+    <label>Выберите модель:</label>
+    <div>
+        <select id="model" name="models" disabled required onchange="modelChange()">
+            <option value="none">Выберите модель</option>
+        </select>
+    </div>
+    <br/>
+    <br/>
+    <input type="submit" id="submit" value="Выбрать" disabled/>
+</form>
+<p id="result"></p>
+</body>
+</html>
