@@ -102,8 +102,9 @@
 <body>
 <form onsubmit="submitForm()">
     <label>Выберите производителя:</label>
-    <div class="styled-select green rounded" style="color: black;">
-        <select id="producer" name="producers" style="color: black;" required onchange="selectProducer()">
+    <div>
+        <select class="styled-select green rounded" id="producer" name="producers" style="color: white;" required
+                onchange="selectProducer()">
             <option value="none">Выберите производителя</option>
             <option value="Intel">Intel</option>
             <option value="WesternDigital">WesternDigital</option>
@@ -115,7 +116,7 @@
     <br/>
     <label>Выберите модель:</label>
     <div>
-        <select id="model" name="models" disabled required onchange="modelChange()">
+        <select class="styled-select green rounded" id="model" name="models" style="color:white; width:400px" disabled required onchange="modelChange()">
             <option value="none">Выберите модель</option>
         </select>
     </div>
