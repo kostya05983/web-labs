@@ -11,7 +11,6 @@ head = """
 <head>
     <meta charset="UTF-8">
     <title>first Question</title>
-   <link href="styles.css" rel="stylesheet">
 </head>
 <body style="background-color: white" >
 """
@@ -117,6 +116,8 @@ def print_form(method, current):
 def right_answer():
     current = storage.find_cookie_session(cook["session"].value, "current")
     value = form.getvalue("question")
+    if value is None:
+        value = 0
     res = storage.find_cookie_session(cook["session"].value, "result")
     if int(questions[current - 1][2]) == int(value):
         res = storage.find_cookie_session(cook["session"].value, "result")

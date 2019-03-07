@@ -26,10 +26,13 @@
                 return;
             }
             let producerValue = producer.options[producer.selectedIndex].value;
-            //Делаем запрос для получения результатов списка
+            //Делаем запрос для получения результатов списка состояние 0 UNSENT
             let xhr = new XMLHttpRequest();
+            //Инициализируем запрос с методом GET и маршрутом, указываем что он асинхронный, cостояние opened
             xhr.open('GET', 'http://localhost:8080/models/?producer=' + producerValue, true);
+            //Отправляем запрос переводя Состояние HEADERS_RECIEVED
             xhr.send();
+            //Вызывается каждый раз при изменении состояния
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     //Парсим json
@@ -116,7 +119,8 @@
     <br/>
     <label>Выберите модель:</label>
     <div>
-        <select class="styled-select green rounded" id="model" name="models" style="color:white; width:400px" disabled required onchange="modelChange()">
+        <select class="styled-select green rounded" id="model" name="models" style="color:white; width:400px" disabled
+                required onchange="modelChange()">
             <option value="none">Выберите модель</option>
         </select>
     </div>
